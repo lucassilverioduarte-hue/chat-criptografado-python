@@ -1,11 +1,24 @@
-Arquitetura: Cliente-Servidor via TCP. O TCP foi escolhido por garantir que os pacotes de mensagens cheguem na ordem correta e sem perdas.
+# Projeto de Chat com Sockets e Criptografia
 
-Criptografia Simétrica (AES/Fernet): Utilizamos a biblioteca cryptography com o protocolo Fernet. Ele usa AES no modo CBC com uma chave de 128 bits para criptografia e HMAC para autenticação (garante que a mensagem não foi alterada).
+Este projeto foi desenvolvido como atividade prática para a disciplina de Infraestrutura em Redes. É um chat simples de cliente e servidor que usa Sockets TCP e criptografia para proteger as mensagens.
 
-Fluxo de Dados:
+## Tecnologias
+* Python 3
+* Biblioteca `cryptography` (Fernet)
+* Sockets (TCP)
 
-O Cliente transforma a string em bytes (utf-8).
+## Como funciona a criptografia
+Para este projeto, escolhi a criptografia simétrica **Fernet (AES)**. Usei uma chave única que fica salva tanto no cliente quanto no servidor. 
 
-A chave simétrica embaralha esses bytes.
+**O processo é simples:** O cliente pega o que eu digito, transforma em código antes de mandar pela rede e o servidor usa a mesma chave para "traduzir" a mensagem de volta e mostrar na tela. Isso garante que, se alguém interceptar o sinal, só verá códigos bagunçados.
 
-O Servidor recebe os bytes embaralhados e usa a mesma chave para reverter o processo.
+## Como testar
+1. Instale a biblioteca: `pip install cryptography`
+2. Primeiro, rode o servidor: `python server.py`
+3. Depois, abra outro terminal e rode o cliente: `python client.py`
+4. Digite a mensagem no cliente e ela aparecerá descriptografada no servidor.
+
+## Arquivos
+* `server.py`: Código do servidor que aceita as conexões.
+* `client.py`: Código do cliente para enviar mensagens.
+* `.gitignore`: Para não subir arquivos inúteis do Python.
